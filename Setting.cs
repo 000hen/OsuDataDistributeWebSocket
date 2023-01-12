@@ -40,6 +40,13 @@ namespace OsuDataDistributeRestful
             get => Setting.FilePort.ToString();
         }
 
+        [Integer(MinValue = 5000, MaxValue = 65535, RequireRestart = true)]
+        public ConfigurationElement WebSocketPort
+        {
+            set => Setting.WebSocketPort = int.Parse(value);
+            get => Setting.WebSocketPort.ToString();
+        }
+
         public void onConfigurationLoad()
         {
         }
@@ -61,5 +68,6 @@ namespace OsuDataDistributeRestful
 
         public static int ApiPort = 10800;
         public static int FilePort = 10801;
+        public static int WebSocketPort = 10802;
     }
 }

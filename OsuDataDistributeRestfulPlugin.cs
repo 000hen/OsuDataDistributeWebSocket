@@ -13,9 +13,9 @@ namespace OsuDataDistributeRestful
     [SyncPluginID("50549ae4-8ba8-4b3b-9d18-9828d43c6523", VERSION)]
     public class OsuDataDistributeRestfulPlugin : Plugin
     {
-        public const string PLUGIN_NAME = "OsuDataDistributeRestful";
-        public const string PLUGIN_AUTHOR = "KedamavOvO";
-        public const string VERSION = "0.7.0";
+        public const string PLUGIN_NAME = "osu!SyncWebSocket";
+        public const string PLUGIN_AUTHOR = "Muisnow";
+        public const string VERSION = "0.0.1";
 
         public static readonly Version MIN_ORTDP_VERSION = Version.Parse("1.6.0");
         public static readonly Version MIN_RTPPD_VERSION = Version.Parse("1.8.0");
@@ -126,9 +126,12 @@ namespace OsuDataDistributeRestful
             var rtppd = RTPPD_Initialize();
             var olsp = OLSP_Initialize();
 
-            if(ortdp !=null && rtppd != null)
+            if (ortdp !=null && rtppd != null)
             {
                 ApiServer.RegisterResource(new ExtraApis(ortdp,rtppd));
+                WebSocket ws = new WebSocket();
+                ws.InitWebSocket(ortdp, rtppd);
+                ws.WebSocketServerStart();
             }
         }
 
